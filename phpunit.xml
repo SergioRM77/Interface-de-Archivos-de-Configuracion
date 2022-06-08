@@ -8,11 +8,11 @@
     xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
   <coverage processUncoveredFiles="false">
     <include>
-      <directory suffix=".php">src</directory>      
+      <directory suffix=".php">back/libs</directory>      
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="Proyecto">
+    <testsuite name="Archivos de configuración">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
