@@ -19,7 +19,7 @@ class ini implements configuracion{
         $ini = [];
         if (is_array($files)){
             foreach ($files as $file => $value){
-                if (!is_numeric($value)){
+                if (!is_numeric($file)){
                     $ini[] = "[". $file ."]". PHP_EOL;
                     if(is_array($value)){
                         if(count($value)==2)
@@ -31,7 +31,7 @@ class ini implements configuracion{
                         $ini[]= ";" . $value . PHP_EOL;   
                 }
 
-                if (is_numeric($value)){
+                if (is_numeric($file)){
                     if(is_array($value)){
                         if(count($value)==2)
                             $ini[] = ";" . $value[0] . " = " . $value[1] . PHP_EOL;
