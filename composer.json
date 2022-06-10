@@ -6,16 +6,19 @@
     "autoload": {
         "psr-4": {
             
-            "DAW\\CONFIG\\":"/src/"
+            "DAW\\CONFIG\\":"src/"
         }
     },
 
     "autoload-dev": {
         "psr-4": {
-            "DAW\\CONFIG\\":"/src/"
+            "DAW\\CONFIG\\":"src/"
             
         }
-    }
+    },
+    "require": {
+        "symfony/yaml": "^6.1",
+        "symfony/console": "^6.1"
+      }
             
 }
-    

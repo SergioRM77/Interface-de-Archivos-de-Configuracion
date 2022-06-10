@@ -1,6 +1,7 @@
 <?php
 
 namespace DAW\CONFIG;
+include_once "vendor/autoload.php";
 use DAW\CONFIG\file;
 use DAW\CONFIG\configuracion;
 
@@ -9,14 +10,14 @@ class ini2v extends file implements configuracion{
     private string $contenido;
     private array $parsed;
 
-    public function __construct(string $filename)
+    public function __construct($filename)
     {
         parent::__construct($filename);
         $this->contenido = $this->getContentStr();
     }
 
 
-    public function arr2ini(array $a, array $parent = array())
+    private function arr2ini(array $a, array $parent = array())
     {
         $out = '';
         foreach ($a as $k => $v)

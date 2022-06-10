@@ -2,19 +2,24 @@
 namespace DAW\CONFIG;
 use DAW\CONFIG\file;
 use DAW\CONFIG\configuracion;
+use Symfony\Component\Yaml\Yaml;
 
-class json {
+
+class yml extends file implements configuracion {
     private array $arrayContent;
 
-    public function __construct($contenido)
+    public function __construct(string $nombreArchivo)
     {
-        
-        $this->arrayContent = $contenido;
+        parent::__construct($nombreArchivo);
+        $contenidoString = $this->getContentStr();
+        $this->arrayContent = Yaml::parse($contenidoString);
+                
     }
 
 
-    public function showFileJson(){
-        return json_encode($this->arrayContent);
+    public function showFileYaml(){
+        return Yaml::dump($this->arrayContent);
+        
     }
     public function addVar(string $name, $value){
         $this->arrayContent[$name] = $value;
@@ -37,23 +42,16 @@ class json {
         }
     }
 
-    public function TransformInFileJson(){
-        $fo = fopen("src/archivo.json", "w");
-        fwrite($fo, $this->showFileJson());
+    public function TransformInFileYaml(){
+        /*
+        esto crearía un nuevo archivo
+        $fo = fopen("src/" . $this->getFilename(), "w");
+        fwrite($fo, $this->showFileYaml());
+        */
+
+        $this->reWrite($this->showFileYaml());
     }
 }
 
-$array = [
-    "hola" => 5,
-    "hola2" => "K ASE",
-    "hola3" => [45, "mamoncin"],
-    "edad",
-    30
-];
-
-$archivo = new json($array);
-$archivo->addVar("prueba", "me cago en json");
-$archivo->deleteVar("hola");
-$archivo->TransformInFileJson();
 
 ?>

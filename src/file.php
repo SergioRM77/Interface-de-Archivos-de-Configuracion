@@ -22,11 +22,11 @@ class file{
     }
 
     public function reWrite(string $newContenido){
-        return $this->content = file_put_contents($this->filename, $newContenido);
+        $this->content = file_put_contents($this->filename, $newContenido);
     }
 
     public function delFile(){
-        return unlink($this->filename);
+        unlink($this->filename);
     }
 }
 ?>
