@@ -14,7 +14,26 @@ final class ymlTest extends TestCase{
         $yaml = new yml("tests/archivos/archivo1.yaml");
         $yaml->addVar("pel", "pel");
         $yaml->TransformInFileYaml();
-        $this->assertEquals(file_get_contents("tests/archivos/archivo1.yaml"), file_get_contents("tests/archivos/archivo2.yaml" ));
+        $yaml2 = new yml("tests/archivos/archivo2.yaml");
+        $this->assertFileEquals(("tests/archivos/archivo1.yaml"), ("tests/archivos/archivo2.yaml" ));
+        $yaml->deleteVar("bar");
+        $yaml2->deleteVar("bar");
+        $yaml->TransformInFileYaml();
+        $yaml2->TransformInFileYaml();
+        $this->assertFileEquals(("tests/archivos/archivo1.yaml"), ("tests/archivos/archivo2.yaml" ));
+        $yaml->modVar("foo", "miasma");
+        $yaml2->modVar("foo", "miasma");
+        $yaml->addVar("bar", "tre");
+        $yaml2->addVar("bar", "tre");
+        $yaml->addVar("sap", "sap");
+        $yaml2->addVar("sap", "sap");
+        $yaml->TransformInFileYaml();
+        $yaml2->TransformInFileYaml();
+        $this->assertEquals($yaml->readValue("sap"), $yaml2->readValue("sap"));
+
+
+
+
     }
 }
 ?>
