@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use DAW\CONFIG\yml;
-use Symfony\Component\Yaml\Yaml;
+//use Symfony\Component\Yaml\Yaml;
 
 final class ymlTest extends TestCase{
     public function testyml(){
@@ -15,12 +15,12 @@ final class ymlTest extends TestCase{
         $yaml->addVar("pel", "pel");
         $yaml->TransformInFileYaml();
         $yaml2 = new yml("tests/archivos/archivo2.yaml");
-        $this->assertFileEquals(("tests/archivos/archivo1.yaml"), ("tests/archivos/archivo2.yaml" ));
         $yaml->deleteVar("bar");
         $yaml2->deleteVar("bar");
         $yaml->TransformInFileYaml();
         $yaml2->TransformInFileYaml();
         $this->assertFileEquals(("tests/archivos/archivo1.yaml"), ("tests/archivos/archivo2.yaml" ));
+
         $yaml->modVar("foo", "miasma");
         $yaml2->modVar("foo", "miasma");
         $yaml->addVar("bar", "tre");
@@ -30,9 +30,18 @@ final class ymlTest extends TestCase{
         $yaml->TransformInFileYaml();
         $yaml2->TransformInFileYaml();
         $this->assertEquals($yaml->readValue("sap"), $yaml2->readValue("sap"));
+        $this->assertFileEquals(("tests/archivos/archivo1.yaml"), ("tests/archivos/archivo2.yaml" ));
 
-
-
+        $yaml->modVar("foo", "bar");
+        $yaml2->modVar("foo", "bar");
+        $yaml->addVar("bar", "baz");
+        $yaml2->addVar("bar", "baz");
+        $yaml->addVar("pel", "pel");
+        $yaml2->addVar("pel", "pel");
+        $yaml->TransformInFileYaml();
+        $yaml2->TransformInFileYaml();
+        $this->assertFileEquals(("tests/archivos/archivo1.yaml"), ("tests/archivos/archivo2.yaml" ));
+        //al terminar vuelvo los archivos al estado inicial
 
     }
 }

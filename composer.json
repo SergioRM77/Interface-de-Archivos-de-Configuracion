@@ -5,13 +5,14 @@
     
     "autoload": {
         "psr-4": {
-            
+            "PHPUnit\\":"vendor/phpunit/phpunit/src/",
             "DAW\\CONFIG\\":"src/"
         }
     },
 
     "autoload-dev": {
         "psr-4": {
+            "PHPUnit\\":"vendor/phpunit/phpunit/src/",
             "DAW\\CONFIG\\":"src/"
             
         }

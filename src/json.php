@@ -3,13 +3,20 @@ namespace DAW\CONFIG;
 use DAW\CONFIG\file;
 use DAW\CONFIG\configuracion;
 
-class json {
+class json extends file implements configuracion{
     private array $arrayContent;
+/*
+ *Mis conclusiones: se ha pensado todo para trabajar con archivos, independientemente de la extension,
+ *la funcion es transformarlo a string, de ahí pasa a array y con eso se trabaja
+ *añade, borra, cambia... y luego entrega, las funciones son las mismas para todos
+ *La diferencia es, qué función o librería hay que usar para cada tipo de archivo
+ */
 
     public function __construct($contenido)
     {
-        
-        $this->arrayContent = $contenido;
+        parent::__construct($contenido);
+        $arrayContenido = $this->getContentStr();
+        $this->arrayContent = json_decode($arrayContenido, true);
     }
 
 
@@ -38,22 +45,9 @@ class json {
     }
 
     public function TransformInFileJson(){
-        $fo = fopen("src/archivo.json", "w");
-        fwrite($fo, $this->showFileJson());
+        
+         $this->reWrite($this->showFileJson());
     }
 }
-
-$array = [
-    "hola" => 5,
-    "hola2" => "K ASE",
-    "hola3" => [45, "mamoncin"],
-    "edad",
-    30
-];
-
-$archivo = new json($array);
-$archivo->addVar("prueba", "me cago en json");
-$archivo->deleteVar("hola");
-$archivo->TransformInFileJson();
 
 ?>
